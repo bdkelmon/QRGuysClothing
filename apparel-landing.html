@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>QR Guys Clothing Co. Apparel Content</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 20px;
+        font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto,
+          sans-serif;
+        background-color: #ffffff; /* White background */
+        color: #000000; /* Black text */
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center content horizontally */
+        justify-content: center; /* Center content vertically */
+        min-height: calc(100vh - 40px); /* Full viewport height minus padding */
+        text-align: center; /* Center text within elements */
+        overflow-wrap: break-word; /* Wrap long text */
+        word-wrap: break-word;
+      }
+      #content-container {
+        max-width: 800px; /* Limit content width */
+        width: 100%;
+      }
+      img {
+        max-width: 100%; /* Ensure image fits container */
+        height: auto;
+        display: block; /* Prevents extra space below image */
+        margin: 0 auto 15px auto; /* Center image and add space below */
+        border-radius: 8px; /* Optional: slight rounding */
+      }
+      p {
+        font-size: 1.2rem; /* Adjust text size as needed */
+        line-height: 1.6;
+        margin: 0; /* Remove default paragraph margin */
+      }
+      .error {
+        color: #cc0000;
+        font-weight: bold;
+      }
+      footer {
+        margin-top: 30px; /* Space above the footer */
+        padding: 15px;
+        text-align: center;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      #backToApparelBtn {
+        /* Basic button styling (borrowed from apparel.html) */
+        appearance: none;
+        border: 1px solid #2b2f4e; /* Use darker colors since background is white */
+        background: #f0f0f0; /* Light grey background */
+        color: #171a2b; /* Dark text */
+        border-radius: 10px;
+        padding: 10px 14px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 0.9rem;
+        font-family: inherit; /* Use body font */
+        transition: background-color 0.2s, border-color 0.2s;
+      }
+
+      #backToApparelBtn:hover {
+        background-color: #e0e0e0;
+        border-color: #6c7dff; /* Accent color on hover */
+      }
+
+      #backToApparelBtn i {
+        margin-right: 6px; /* Space between icon and text */
+      }
+    </style>
+  </head>
+  <body>
+    <footer>
+      <button id="backToApparelBtn">
+        <i class="fas fa-arrow-left"></i> Back to QR Guys Clothing Co. Apparel Studio
+      </button>
+    </footer>
+    <div id="content-container">
+      <p class="loading">Loading...</p>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const container = document.getElementById("content-container");
+        const params = new URLSearchParams(window.location.search);
+        const textParam = params.get("text");
+        const imageUrlParam = params.get("image_url");
+
+        container.innerHTML = ""; // Clear loading message
+
+        // --- Image Handling ---
+        if (imageUrlParam) {
+          try {
+            const imageUrl = new URL(imageUrlParam);
+            if (imageUrl.protocol !== "https:") throw new Error("Only HTTPS images are supported");
+            const imgElement = document.createElement("img");
+            imgElement.src = imageUrlParam;
+            imgElement.alt = textParam || "Apparel Image";
+            imgElement.onerror = () => {
+              console.error("Failed to load image from URL:", imageUrlParam);
+              const errorMsg = document.createElement("p");
+              errorMsg.textContent = "[Image could not be loaded]";
+              errorMsg.classList.add("error");
+              container.insertBefore(errorMsg, container.firstChild);
+            };
+            container.appendChild(imgElement);
+          } catch (e) {
+            console.error("Invalid image URL provided:", imageUrlParam);
+            const errorMsg = document.createElement("p");
+            errorMsg.textContent = "[Invalid image URL specified]";
+            errorMsg.classList.add("error");
+            container.appendChild(errorMsg);
+          }
+        }
+
+        // --- Text Handling ---
+        if (textParam) {
+          const textElement = document.createElement("p");
+          textElement.textContent = textParam;
+          container.appendChild(textElement);
+        }
+
+        // --- Empty State ---
+        if (!imageUrlParam && !textParam) {
+          const emptyMessage = document.createElement("p");
+          emptyMessage.textContent = "No content specified for this QR code.";
+          emptyMessage.classList.add("muted");
+          container.appendChild(emptyMessage);
+        }
+
+        // --- Back Button Logic ---
+        const backButton = document.getElementById("backToApparelBtn");
+        if (backButton) {
+          backButton.addEventListener("click", () => {
+            // Corrected the path here:
+            window.location.href = "/Apparel.html"; 
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
+
