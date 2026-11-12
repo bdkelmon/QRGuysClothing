@@ -85,7 +85,7 @@ Proposed future cadence: after-run failure checks and daily reconciliation. Not 
 7. Orchestrator enables only configured, authorized destinations; validates one end-to-end product.
 8. Expand to approved catalog; verify runner triggers and reconciliation before declaring continuous operation.
 
-## Initial backlog
+## Original backlog (superseded by README implementation status)
 - COMPLETE: locate QR Guys repository and existing apparel source; create agent contracts.
 - NEXT: map source dependencies and independent QR Guys environment.
 - BLOCKED ON IMPLEMENTATION: catalog, feed adapters and durable runner.
@@ -94,3 +94,6 @@ Proposed future cadence: after-run failure checks and daily reconciliation. Not 
 - NOT ENABLED: production changes, merchant submissions, recurring execution or customer messaging.
 
 Suggested commit message: Define QR Guys automation agent team
+
+## Implementation update — 2026-11-12
+MWM Visionary Solutions is the operator. New services are required; products remain undecided. Initial editor/auth/scan/catalog code and proposed schema exist on the migration branch. README is authoritative for implemented features and remaining gaps. SQL and deployed integration behavior are unverified. No recurring jobs or payment handlers are enabled.
